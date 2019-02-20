@@ -4324,7 +4324,7 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     2\x1d.kvrpcpb.RawBatchScanResponseH\0R\x0cRawBatchScan\x129\n\x0bCoproce\
     ssor\x18\x16\x20\x01(\x0b2\x15.coprocessor.ResponseH\0R\x0bCoprocessorB\
     \x05\n\x03cmd\"B\n\x10BatchRaftMessage\x12.\n\x04msgs\x18\x01\x20\x03(\
-    \x0b2\x1a.raft_serverpb.RaftMessageR\x04msgs2\xa7\x11\n\x04Tikv\x124\n\
+    \x0b2\x1a.raft_serverpb.RaftMessageR\x04msgs2\xf0\x11\n\x04Tikv\x124\n\
     \x05KvGet\x12\x13.kvrpcpb.GetRequest\x1a\x14.kvrpcpb.GetResponse\"\0\x12\
     7\n\x06KvScan\x12\x14.kvrpcpb.ScanRequest\x1a\x15.kvrpcpb.ScanResponse\"\
     \0\x12C\n\nKvPrewrite\x12\x18.kvrpcpb.PrewriteRequest\x1a\x19.kvrpcpb.Pr\
@@ -4357,15 +4357,17 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x11CoprocessorStream\x12\x14.coprocessor.Request\x1a\x15.coprocessor.Re\
     sponse\"\00\x01\x12;\n\x04Raft\x12\x1a.raft_serverpb.RaftMessage\x1a\x13\
     .raft_serverpb.Done\"\0(\x01\x12>\n\tBatchRaft\x12\x18.tikvpb.BatchRaftM\
-    essage\x1a\x13.raft_serverpb.Done\"\0(\x01\x12A\n\x08Snapshot\x12\x1c.ra\
-    ft_serverpb.SnapshotChunk\x1a\x13.raft_serverpb.Done\"\0(\x01\x12J\n\x0b\
-    SplitRegion\x12\x1b.kvrpcpb.SplitRegionRequest\x1a\x1c.kvrpcpb.SplitRegi\
-    onResponse\"\0\x12M\n\x0cMvccGetByKey\x12\x1c.kvrpcpb.MvccGetByKeyReques\
-    t\x1a\x1d.kvrpcpb.MvccGetByKeyResponse\"\0\x12Y\n\x10MvccGetByStartTs\
-    \x12\x20.kvrpcpb.MvccGetByStartTsRequest\x1a!.kvrpcpb.MvccGetByStartTsRe\
-    sponse\"\0\x12R\n\rBatchCommands\x12\x1c.tikvpb.BatchCommandsRequest\x1a\
-    \x1d.tikvpb.BatchCommandsResponse\"\0(\x010\x01B\x1e\n\x10org.tikv.kvpro\
-    to\xd0\xe2\x1e\x01\xc8\xe2\x1e\x01\xe0\xe2\x1e\x01b\x06proto3\
+    essage\x1a\x13.raft_serverpb.Done\"\0(\x01\x12G\n\nBatchRaft2\x12\x20.ra\
+    ft_serverpb.BatchRaftMessage2\x1a\x13.raft_serverpb.Done\"\0(\x01\x12A\n\
+    \x08Snapshot\x12\x1c.raft_serverpb.SnapshotChunk\x1a\x13.raft_serverpb.D\
+    one\"\0(\x01\x12J\n\x0bSplitRegion\x12\x1b.kvrpcpb.SplitRegionRequest\
+    \x1a\x1c.kvrpcpb.SplitRegionResponse\"\0\x12M\n\x0cMvccGetByKey\x12\x1c.\
+    kvrpcpb.MvccGetByKeyRequest\x1a\x1d.kvrpcpb.MvccGetByKeyResponse\"\0\x12\
+    Y\n\x10MvccGetByStartTs\x12\x20.kvrpcpb.MvccGetByStartTsRequest\x1a!.kvr\
+    pcpb.MvccGetByStartTsResponse\"\0\x12R\n\rBatchCommands\x12\x1c.tikvpb.B\
+    atchCommandsRequest\x1a\x1d.tikvpb.BatchCommandsResponse\"\0(\x010\x01B\
+    \x1e\n\x10org.tikv.kvproto\xe0\xe2\x1e\x01\xd0\xe2\x1e\x01\xc8\xe2\x1e\
+    \x01b\x06proto3\
 ";
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {

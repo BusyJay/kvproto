@@ -6,6 +6,21 @@ import "metapb.proto";
 
 option java_package = "org.tikv.kvproto";
 
+message BatchMessageMeta {
+    uint64 region_id = 1;
+    metapb.RegionEpoch region_epoch = 2;
+    eraftpb.Message message = 3;
+    bytes start_key = 4;
+    bytes end_key = 5;
+}
+
+message BatchRaftMessage2 {
+    eraftpb.MessageType message_type = 1;
+    uint64 from_store_id = 2;
+    uint64 to_store_id = 3;
+    repeated BatchMessageMeta metas = 4;
+}
+
 message RaftMessage {
     uint64 region_id = 1;
     metapb.Peer from_peer = 2;

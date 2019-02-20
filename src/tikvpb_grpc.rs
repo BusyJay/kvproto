@@ -200,6 +200,13 @@ const METHOD_TIKV_BATCH_RAFT: ::grpcio::Method<super::tikvpb::BatchRaftMessage, 
     resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
 };
 
+const METHOD_TIKV_BATCH_RAFT2: ::grpcio::Method<super::raft_serverpb::BatchRaftMessage2, super::raft_serverpb::Done> = ::grpcio::Method {
+    ty: ::grpcio::MethodType::ClientStreaming,
+    name: "/tikvpb.Tikv/BatchRaft2",
+    req_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+    resp_mar: ::grpcio::Marshaller { ser: ::grpcio::pb_ser, de: ::grpcio::pb_de },
+};
+
 const METHOD_TIKV_SNAPSHOT: ::grpcio::Method<super::raft_serverpb::SnapshotChunk, super::raft_serverpb::Done> = ::grpcio::Method {
     ty: ::grpcio::MethodType::ClientStreaming,
     name: "/tikvpb.Tikv/Snapshot",
@@ -639,6 +646,14 @@ impl TikvClient {
         self.batch_raft_opt(::grpcio::CallOption::default())
     }
 
+    pub fn batch_raft2_opt(&self, opt: ::grpcio::CallOption) -> ::grpcio::Result<(::grpcio::ClientCStreamSender<super::raft_serverpb::BatchRaftMessage2>, ::grpcio::ClientCStreamReceiver<super::raft_serverpb::Done>)> {
+        self.client.client_streaming(&METHOD_TIKV_BATCH_RAFT2, opt)
+    }
+
+    pub fn batch_raft2(&self) -> ::grpcio::Result<(::grpcio::ClientCStreamSender<super::raft_serverpb::BatchRaftMessage2>, ::grpcio::ClientCStreamReceiver<super::raft_serverpb::Done>)> {
+        self.batch_raft2_opt(::grpcio::CallOption::default())
+    }
+
     pub fn snapshot_opt(&self, opt: ::grpcio::CallOption) -> ::grpcio::Result<(::grpcio::ClientCStreamSender<super::raft_serverpb::SnapshotChunk>, ::grpcio::ClientCStreamReceiver<super::raft_serverpb::Done>)> {
         self.client.client_streaming(&METHOD_TIKV_SNAPSHOT, opt)
     }
@@ -734,6 +749,7 @@ pub trait Tikv {
     fn coprocessor_stream(&mut self, ctx: ::grpcio::RpcContext, req: super::coprocessor::Request, sink: ::grpcio::ServerStreamingSink<super::coprocessor::Response>);
     fn raft(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::raft_serverpb::RaftMessage>, sink: ::grpcio::ClientStreamingSink<super::raft_serverpb::Done>);
     fn batch_raft(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::tikvpb::BatchRaftMessage>, sink: ::grpcio::ClientStreamingSink<super::raft_serverpb::Done>);
+    fn batch_raft2(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::raft_serverpb::BatchRaftMessage2>, sink: ::grpcio::ClientStreamingSink<super::raft_serverpb::Done>);
     fn snapshot(&mut self, ctx: ::grpcio::RpcContext, stream: ::grpcio::RequestStream<super::raft_serverpb::SnapshotChunk>, sink: ::grpcio::ClientStreamingSink<super::raft_serverpb::Done>);
     fn split_region(&mut self, ctx: ::grpcio::RpcContext, req: super::kvrpcpb::SplitRegionRequest, sink: ::grpcio::UnarySink<super::kvrpcpb::SplitRegionResponse>);
     fn mvcc_get_by_key(&mut self, ctx: ::grpcio::RpcContext, req: super::kvrpcpb::MvccGetByKeyRequest, sink: ::grpcio::UnarySink<super::kvrpcpb::MvccGetByKeyResponse>);
@@ -846,6 +862,10 @@ pub fn create_tikv<S: Tikv + Send + Clone + 'static>(s: S) -> ::grpcio::Service 
     let mut instance = s.clone();
     builder = builder.add_client_streaming_handler(&METHOD_TIKV_BATCH_RAFT, move |ctx, req, resp| {
         instance.batch_raft(ctx, req, resp)
+    });
+    let mut instance = s.clone();
+    builder = builder.add_client_streaming_handler(&METHOD_TIKV_BATCH_RAFT2, move |ctx, req, resp| {
+        instance.batch_raft2(ctx, req, resp)
     });
     let mut instance = s.clone();
     builder = builder.add_client_streaming_handler(&METHOD_TIKV_SNAPSHOT, move |ctx, req, resp| {

@@ -22,6 +22,631 @@ use protobuf::Message as Message_imported_for_functions;
 use protobuf::ProtobufEnum as ProtobufEnum_imported_for_functions;
 
 #[derive(PartialEq,Clone,Default)]
+pub struct BatchMessageMeta {
+    // message fields
+    pub region_id: u64,
+    pub region_epoch: ::protobuf::SingularPtrField<super::metapb::RegionEpoch>,
+    pub message: ::protobuf::SingularPtrField<super::eraftpb::Message>,
+    pub start_key: ::std::vec::Vec<u8>,
+    pub end_key: ::std::vec::Vec<u8>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+impl BatchMessageMeta {
+    pub fn new() -> BatchMessageMeta {
+        ::std::default::Default::default()
+    }
+
+    // uint64 region_id = 1;
+
+    pub fn clear_region_id(&mut self) {
+        self.region_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_region_id(&mut self, v: u64) {
+        self.region_id = v;
+    }
+
+    pub fn get_region_id(&self) -> u64 {
+        self.region_id
+    }
+
+    // .metapb.RegionEpoch region_epoch = 2;
+
+    pub fn clear_region_epoch(&mut self) {
+        self.region_epoch.clear();
+    }
+
+    pub fn has_region_epoch(&self) -> bool {
+        self.region_epoch.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_region_epoch(&mut self, v: super::metapb::RegionEpoch) {
+        self.region_epoch = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_region_epoch(&mut self) -> &mut super::metapb::RegionEpoch {
+        if self.region_epoch.is_none() {
+            self.region_epoch.set_default();
+        }
+        self.region_epoch.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_region_epoch(&mut self) -> super::metapb::RegionEpoch {
+        self.region_epoch.take().unwrap_or_else(|| super::metapb::RegionEpoch::new())
+    }
+
+    pub fn get_region_epoch(&self) -> &super::metapb::RegionEpoch {
+        self.region_epoch.as_ref().unwrap_or_else(|| super::metapb::RegionEpoch::default_instance())
+    }
+
+    // .eraftpb.Message message = 3;
+
+    pub fn clear_message(&mut self) {
+        self.message.clear();
+    }
+
+    pub fn has_message(&self) -> bool {
+        self.message.is_some()
+    }
+
+    // Param is passed by value, moved
+    pub fn set_message(&mut self, v: super::eraftpb::Message) {
+        self.message = ::protobuf::SingularPtrField::some(v);
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_message(&mut self) -> &mut super::eraftpb::Message {
+        if self.message.is_none() {
+            self.message.set_default();
+        }
+        self.message.as_mut().unwrap()
+    }
+
+    // Take field
+    pub fn take_message(&mut self) -> super::eraftpb::Message {
+        self.message.take().unwrap_or_else(|| super::eraftpb::Message::new())
+    }
+
+    pub fn get_message(&self) -> &super::eraftpb::Message {
+        self.message.as_ref().unwrap_or_else(|| super::eraftpb::Message::default_instance())
+    }
+
+    // bytes start_key = 4;
+
+    pub fn clear_start_key(&mut self) {
+        self.start_key.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_start_key(&mut self, v: ::std::vec::Vec<u8>) {
+        self.start_key = v;
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_start_key(&mut self) -> &mut ::std::vec::Vec<u8> {
+        &mut self.start_key
+    }
+
+    // Take field
+    pub fn take_start_key(&mut self) -> ::std::vec::Vec<u8> {
+        ::std::mem::replace(&mut self.start_key, ::std::vec::Vec::new())
+    }
+
+    pub fn get_start_key(&self) -> &[u8] {
+        &self.start_key
+    }
+
+    // bytes end_key = 5;
+
+    pub fn clear_end_key(&mut self) {
+        self.end_key.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_end_key(&mut self, v: ::std::vec::Vec<u8>) {
+        self.end_key = v;
+    }
+
+    // Mutable pointer to the field.
+    // If field is not initialized, it is initialized with default value first.
+    pub fn mut_end_key(&mut self) -> &mut ::std::vec::Vec<u8> {
+        &mut self.end_key
+    }
+
+    // Take field
+    pub fn take_end_key(&mut self) -> ::std::vec::Vec<u8> {
+        ::std::mem::replace(&mut self.end_key, ::std::vec::Vec::new())
+    }
+
+    pub fn get_end_key(&self) -> &[u8] {
+        &self.end_key
+    }
+}
+
+impl ::protobuf::Message for BatchMessageMeta {
+    fn is_initialized(&self) -> bool {
+        for v in &self.region_epoch {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        for v in &self.message {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.region_id = tmp;
+                },
+                2 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.region_epoch)?;
+                },
+                3 => {
+                    ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.message)?;
+                },
+                4 => {
+                    ::protobuf::rt::read_singular_proto3_bytes_into(wire_type, is, &mut self.start_key)?;
+                },
+                5 => {
+                    ::protobuf::rt::read_singular_proto3_bytes_into(wire_type, is, &mut self.end_key)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if self.region_id != 0 {
+            my_size += ::protobuf::rt::value_size(1, self.region_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if let Some(ref v) = self.region_epoch.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        if let Some(ref v) = self.message.as_ref() {
+            let len = v.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        }
+        if !self.start_key.is_empty() {
+            my_size += ::protobuf::rt::bytes_size(4, &self.start_key);
+        }
+        if !self.end_key.is_empty() {
+            my_size += ::protobuf::rt::bytes_size(5, &self.end_key);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if self.region_id != 0 {
+            os.write_uint64(1, self.region_id)?;
+        }
+        if let Some(ref v) = self.region_epoch.as_ref() {
+            os.write_tag(2, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        if let Some(ref v) = self.message.as_ref() {
+            os.write_tag(3, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        }
+        if !self.start_key.is_empty() {
+            os.write_bytes(4, &self.start_key)?;
+        }
+        if !self.end_key.is_empty() {
+            os.write_bytes(5, &self.end_key)?;
+        }
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> BatchMessageMeta {
+        BatchMessageMeta::new()
+    }
+
+    fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint64>(
+                    "region_id",
+                    |m: &BatchMessageMeta| { &m.region_id },
+                    |m: &mut BatchMessageMeta| { &mut m.region_id },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::metapb::RegionEpoch>>(
+                    "region_epoch",
+                    |m: &BatchMessageMeta| { &m.region_epoch },
+                    |m: &mut BatchMessageMeta| { &mut m.region_epoch },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_singular_ptr_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<super::eraftpb::Message>>(
+                    "message",
+                    |m: &BatchMessageMeta| { &m.message },
+                    |m: &mut BatchMessageMeta| { &mut m.message },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeBytes>(
+                    "start_key",
+                    |m: &BatchMessageMeta| { &m.start_key },
+                    |m: &mut BatchMessageMeta| { &mut m.start_key },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeBytes>(
+                    "end_key",
+                    |m: &BatchMessageMeta| { &m.end_key },
+                    |m: &mut BatchMessageMeta| { &mut m.end_key },
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<BatchMessageMeta>(
+                    "BatchMessageMeta",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+
+    fn default_instance() -> &'static BatchMessageMeta {
+        static mut instance: ::protobuf::lazy::Lazy<BatchMessageMeta> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const BatchMessageMeta,
+        };
+        unsafe {
+            instance.get(BatchMessageMeta::new)
+        }
+    }
+}
+
+impl ::protobuf::Clear for BatchMessageMeta {
+    fn clear(&mut self) {
+        self.clear_region_id();
+        self.clear_region_epoch();
+        self.clear_message();
+        self.clear_start_key();
+        self.clear_end_key();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for BatchMessageMeta {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for BatchMessageMeta {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
+pub struct BatchRaftMessage2 {
+    // message fields
+    pub message_type: super::eraftpb::MessageType,
+    pub from_store_id: u64,
+    pub to_store_id: u64,
+    pub metas: ::protobuf::RepeatedField<BatchMessageMeta>,
+    // special fields
+    unknown_fields: ::protobuf::UnknownFields,
+    cached_size: ::protobuf::CachedSize,
+}
+
+impl BatchRaftMessage2 {
+    pub fn new() -> BatchRaftMessage2 {
+        ::std::default::Default::default()
+    }
+
+    // .eraftpb.MessageType message_type = 1;
+
+    pub fn clear_message_type(&mut self) {
+        self.message_type = super::eraftpb::MessageType::MsgHup;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_message_type(&mut self, v: super::eraftpb::MessageType) {
+        self.message_type = v;
+    }
+
+    pub fn get_message_type(&self) -> super::eraftpb::MessageType {
+        self.message_type
+    }
+
+    // uint64 from_store_id = 2;
+
+    pub fn clear_from_store_id(&mut self) {
+        self.from_store_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_from_store_id(&mut self, v: u64) {
+        self.from_store_id = v;
+    }
+
+    pub fn get_from_store_id(&self) -> u64 {
+        self.from_store_id
+    }
+
+    // uint64 to_store_id = 3;
+
+    pub fn clear_to_store_id(&mut self) {
+        self.to_store_id = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_to_store_id(&mut self, v: u64) {
+        self.to_store_id = v;
+    }
+
+    pub fn get_to_store_id(&self) -> u64 {
+        self.to_store_id
+    }
+
+    // repeated .raft_serverpb.BatchMessageMeta metas = 4;
+
+    pub fn clear_metas(&mut self) {
+        self.metas.clear();
+    }
+
+    // Param is passed by value, moved
+    pub fn set_metas(&mut self, v: ::protobuf::RepeatedField<BatchMessageMeta>) {
+        self.metas = v;
+    }
+
+    // Mutable pointer to the field.
+    pub fn mut_metas(&mut self) -> &mut ::protobuf::RepeatedField<BatchMessageMeta> {
+        &mut self.metas
+    }
+
+    // Take field
+    pub fn take_metas(&mut self) -> ::protobuf::RepeatedField<BatchMessageMeta> {
+        ::std::mem::replace(&mut self.metas, ::protobuf::RepeatedField::new())
+    }
+
+    pub fn get_metas(&self) -> &[BatchMessageMeta] {
+        &self.metas
+    }
+}
+
+impl ::protobuf::Message for BatchRaftMessage2 {
+    fn is_initialized(&self) -> bool {
+        for v in &self.metas {
+            if !v.is_initialized() {
+                return false;
+            }
+        };
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream) -> ::protobuf::ProtobufResult<()> {
+        while !is.eof()? {
+            let (field_number, wire_type) = is.read_tag_unpack()?;
+            match field_number {
+                1 => {
+                    if wire_type == ::protobuf::wire_format::WireTypeVarint {self.message_type = is.read_enum()?;} else {return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));}
+                },
+                2 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.from_store_id = tmp;
+                },
+                3 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.to_store_id = tmp;
+                },
+                4 => {
+                    ::protobuf::rt::read_repeated_message_into(wire_type, is, &mut self.metas)?;
+                },
+                _ => {
+                    ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u32 {
+        let mut my_size = 0;
+        if self.message_type != super::eraftpb::MessageType::MsgHup {
+            my_size += ::protobuf::rt::enum_size(1, self.message_type);
+        }
+        if self.from_store_id != 0 {
+            my_size += ::protobuf::rt::value_size(2, self.from_store_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.to_store_id != 0 {
+            my_size += ::protobuf::rt::value_size(3, self.to_store_id, ::protobuf::wire_format::WireTypeVarint);
+        }
+        for value in &self.metas {
+            let len = value.compute_size();
+            my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
+        };
+        my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
+        self.cached_size.set(my_size);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream) -> ::protobuf::ProtobufResult<()> {
+        if self.message_type != super::eraftpb::MessageType::MsgHup {
+            os.write_enum(1, self.message_type.value())?;
+        }
+        if self.from_store_id != 0 {
+            os.write_uint64(2, self.from_store_id)?;
+        }
+        if self.to_store_id != 0 {
+            os.write_uint64(3, self.to_store_id)?;
+        }
+        for v in &self.metas {
+            os.write_tag(4, ::protobuf::wire_format::WireTypeLengthDelimited)?;
+            os.write_raw_varint32(v.get_cached_size())?;
+            v.write_to_with_cached_sizes(os)?;
+        };
+        os.write_unknown_fields(self.get_unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn get_cached_size(&self) -> u32 {
+        self.cached_size.get()
+    }
+
+    fn get_unknown_fields(&self) -> &::protobuf::UnknownFields {
+        &self.unknown_fields
+    }
+
+    fn mut_unknown_fields(&mut self) -> &mut ::protobuf::UnknownFields {
+        &mut self.unknown_fields
+    }
+
+    fn as_any(&self) -> &::std::any::Any {
+        self as &::std::any::Any
+    }
+    fn as_any_mut(&mut self) -> &mut ::std::any::Any {
+        self as &mut ::std::any::Any
+    }
+    fn into_any(self: Box<Self>) -> ::std::boxed::Box<::std::any::Any> {
+        self
+    }
+
+    fn descriptor(&self) -> &'static ::protobuf::reflect::MessageDescriptor {
+        Self::descriptor_static()
+    }
+
+    fn new() -> BatchRaftMessage2 {
+        BatchRaftMessage2::new()
+    }
+
+    fn descriptor_static() -> &'static ::protobuf::reflect::MessageDescriptor {
+        static mut descriptor: ::protobuf::lazy::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const ::protobuf::reflect::MessageDescriptor,
+        };
+        unsafe {
+            descriptor.get(|| {
+                let mut fields = ::std::vec::Vec::new();
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeEnum<super::eraftpb::MessageType>>(
+                    "message_type",
+                    |m: &BatchRaftMessage2| { &m.message_type },
+                    |m: &mut BatchRaftMessage2| { &mut m.message_type },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint64>(
+                    "from_store_id",
+                    |m: &BatchRaftMessage2| { &m.from_store_id },
+                    |m: &mut BatchRaftMessage2| { &mut m.from_store_id },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_simple_field_accessor::<_, ::protobuf::types::ProtobufTypeUint64>(
+                    "to_store_id",
+                    |m: &BatchRaftMessage2| { &m.to_store_id },
+                    |m: &mut BatchRaftMessage2| { &mut m.to_store_id },
+                ));
+                fields.push(::protobuf::reflect::accessor::make_repeated_field_accessor::<_, ::protobuf::types::ProtobufTypeMessage<BatchMessageMeta>>(
+                    "metas",
+                    |m: &BatchRaftMessage2| { &m.metas },
+                    |m: &mut BatchRaftMessage2| { &mut m.metas },
+                ));
+                ::protobuf::reflect::MessageDescriptor::new::<BatchRaftMessage2>(
+                    "BatchRaftMessage2",
+                    fields,
+                    file_descriptor_proto()
+                )
+            })
+        }
+    }
+
+    fn default_instance() -> &'static BatchRaftMessage2 {
+        static mut instance: ::protobuf::lazy::Lazy<BatchRaftMessage2> = ::protobuf::lazy::Lazy {
+            lock: ::protobuf::lazy::ONCE_INIT,
+            ptr: 0 as *const BatchRaftMessage2,
+        };
+        unsafe {
+            instance.get(BatchRaftMessage2::new)
+        }
+    }
+}
+
+impl ::protobuf::Clear for BatchRaftMessage2 {
+    fn clear(&mut self) {
+        self.clear_message_type();
+        self.clear_from_store_id();
+        self.clear_to_store_id();
+        self.clear_metas();
+        self.unknown_fields.clear();
+    }
+}
+
+impl ::std::fmt::Debug for BatchRaftMessage2 {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for BatchRaftMessage2 {
+    fn as_ref(&self) -> ::protobuf::reflect::ProtobufValueRef {
+        ::protobuf::reflect::ProtobufValueRef::Message(self)
+    }
+}
+
+#[derive(PartialEq,Clone,Default)]
 pub struct RaftMessage {
     // message fields
     pub region_id: u64,
@@ -3268,45 +3893,55 @@ impl ::protobuf::reflect::ProtobufValue for PeerState {
 
 static file_descriptor_proto_data: &'static [u8] = b"\
     \n\x13raft_serverpb.proto\x12\rraft_serverpb\x1a\reraftpb.proto\x1a\x0cm\
-    etapb.proto\"\xec\x02\n\x0bRaftMessage\x12\x1b\n\tregion_id\x18\x01\x20\
-    \x01(\x04R\x08regionId\x12)\n\tfrom_peer\x18\x02\x20\x01(\x0b2\x0c.metap\
-    b.PeerR\x08fromPeer\x12%\n\x07to_peer\x18\x03\x20\x01(\x0b2\x0c.metapb.P\
-    eerR\x06toPeer\x12*\n\x07message\x18\x04\x20\x01(\x0b2\x10.eraftpb.Messa\
-    geR\x07message\x126\n\x0cregion_epoch\x18\x05\x20\x01(\x0b2\x13.metapb.R\
-    egionEpochR\x0bregionEpoch\x12!\n\x0cis_tombstone\x18\x06\x20\x01(\x08R\
-    \x0bisTombstone\x12\x1b\n\tstart_key\x18\x07\x20\x01(\x0cR\x08startKey\
-    \x12\x17\n\x07end_key\x18\x08\x20\x01(\x0cR\x06endKey\x121\n\x0cmerge_ta\
-    rget\x18\t\x20\x01(\x0b2\x0e.metapb.RegionR\x0bmergeTarget\">\n\x12RaftT\
-    runcatedState\x12\x14\n\x05index\x18\x01\x20\x01(\x04R\x05index\x12\x12\
-    \n\x04term\x18\x02\x20\x01(\x04R\x04term\"P\n\x0eSnapshotCFFile\x12\x0e\
-    \n\x02cf\x18\x01\x20\x01(\tR\x02cf\x12\x12\n\x04size\x18\x02\x20\x01(\
-    \x04R\x04size\x12\x1a\n\x08checksum\x18\x03\x20\x01(\rR\x08checksum\"H\n\
-    \x0cSnapshotMeta\x128\n\x08cf_files\x18\x01\x20\x03(\x0b2\x1d.raft_serve\
-    rpb.SnapshotCFFileR\x07cfFiles\"Y\n\rSnapshotChunk\x124\n\x07message\x18\
-    \x01\x20\x01(\x0b2\x1a.raft_serverpb.RaftMessageR\x07message\x12\x12\n\
-    \x04data\x18\x02\x20\x01(\x0cR\x04data\"\x06\n\x04Done\"2\n\x08KeyValue\
-    \x12\x10\n\x03key\x18\x01\x20\x01(\x0cR\x03key\x12\x14\n\x05value\x18\
-    \x02\x20\x01(\x0cR\x05value\"\xcf\x01\n\x10RaftSnapshotData\x12&\n\x06re\
-    gion\x18\x01\x20\x01(\x0b2\x0e.metapb.RegionR\x06region\x12\x1b\n\tfile_\
-    size\x18\x02\x20\x01(\x04R\x08fileSize\x12+\n\x04data\x18\x03\x20\x03(\
-    \x0b2\x17.raft_serverpb.KeyValueR\x04data\x12\x18\n\x07version\x18\x04\
-    \x20\x01(\x04R\x07version\x12/\n\x04meta\x18\x05\x20\x01(\x0b2\x1b.raft_\
-    serverpb.SnapshotMetaR\x04meta\"F\n\nStoreIdent\x12\x1d\n\ncluster_id\
-    \x18\x01\x20\x01(\x04R\tclusterId\x12\x19\n\x08store_id\x18\x02\x20\x01(\
-    \x04R\x07storeId\"b\n\x0eRaftLocalState\x121\n\nhard_state\x18\x01\x20\
-    \x01(\x0b2\x12.eraftpb.HardStateR\thardState\x12\x1d\n\nlast_index\x18\
-    \x02\x20\x01(\x04R\tlastIndex\"\x81\x01\n\x0eRaftApplyState\x12#\n\rappl\
-    ied_index\x18\x01\x20\x01(\x04R\x0cappliedIndex\x12J\n\x0ftruncated_stat\
-    e\x18\x02\x20\x01(\x0b2!.raft_serverpb.RaftTruncatedStateR\x0etruncatedS\
-    tate\"i\n\nMergeState\x12\x1b\n\tmin_index\x18\x01\x20\x01(\x04R\x08minI\
-    ndex\x12&\n\x06target\x18\x02\x20\x01(\x0b2\x0e.metapb.RegionR\x06target\
-    \x12\x16\n\x06commit\x18\x03\x20\x01(\x04R\x06commit\"\xa6\x01\n\x10Regi\
-    onLocalState\x12.\n\x05state\x18\x01\x20\x01(\x0e2\x18.raft_serverpb.Pee\
-    rStateR\x05state\x12&\n\x06region\x18\x02\x20\x01(\x0b2\x0e.metapb.Regio\
-    nR\x06region\x12:\n\x0bmerge_state\x18\x03\x20\x01(\x0b2\x19.raft_server\
-    pb.MergeStateR\nmergeState*A\n\tPeerState\x12\n\n\x06Normal\x10\0\x12\
-    \x0c\n\x08Applying\x10\x01\x12\r\n\tTombstone\x10\x02\x12\x0b\n\x07Mergi\
-    ng\x10\x03B\x12\n\x10org.tikv.kvprotob\x06proto3\
+    etapb.proto\"\xc9\x01\n\x10BatchMessageMeta\x12\x1b\n\tregion_id\x18\x01\
+    \x20\x01(\x04R\x08regionId\x126\n\x0cregion_epoch\x18\x02\x20\x01(\x0b2\
+    \x13.metapb.RegionEpochR\x0bregionEpoch\x12*\n\x07message\x18\x03\x20\
+    \x01(\x0b2\x10.eraftpb.MessageR\x07message\x12\x1b\n\tstart_key\x18\x04\
+    \x20\x01(\x0cR\x08startKey\x12\x17\n\x07end_key\x18\x05\x20\x01(\x0cR\
+    \x06endKey\"\xc7\x01\n\x11BatchRaftMessage2\x127\n\x0cmessage_type\x18\
+    \x01\x20\x01(\x0e2\x14.eraftpb.MessageTypeR\x0bmessageType\x12\"\n\rfrom\
+    _store_id\x18\x02\x20\x01(\x04R\x0bfromStoreId\x12\x1e\n\x0bto_store_id\
+    \x18\x03\x20\x01(\x04R\ttoStoreId\x125\n\x05metas\x18\x04\x20\x03(\x0b2\
+    \x1f.raft_serverpb.BatchMessageMetaR\x05metas\"\xec\x02\n\x0bRaftMessage\
+    \x12\x1b\n\tregion_id\x18\x01\x20\x01(\x04R\x08regionId\x12)\n\tfrom_pee\
+    r\x18\x02\x20\x01(\x0b2\x0c.metapb.PeerR\x08fromPeer\x12%\n\x07to_peer\
+    \x18\x03\x20\x01(\x0b2\x0c.metapb.PeerR\x06toPeer\x12*\n\x07message\x18\
+    \x04\x20\x01(\x0b2\x10.eraftpb.MessageR\x07message\x126\n\x0cregion_epoc\
+    h\x18\x05\x20\x01(\x0b2\x13.metapb.RegionEpochR\x0bregionEpoch\x12!\n\
+    \x0cis_tombstone\x18\x06\x20\x01(\x08R\x0bisTombstone\x12\x1b\n\tstart_k\
+    ey\x18\x07\x20\x01(\x0cR\x08startKey\x12\x17\n\x07end_key\x18\x08\x20\
+    \x01(\x0cR\x06endKey\x121\n\x0cmerge_target\x18\t\x20\x01(\x0b2\x0e.meta\
+    pb.RegionR\x0bmergeTarget\">\n\x12RaftTruncatedState\x12\x14\n\x05index\
+    \x18\x01\x20\x01(\x04R\x05index\x12\x12\n\x04term\x18\x02\x20\x01(\x04R\
+    \x04term\"P\n\x0eSnapshotCFFile\x12\x0e\n\x02cf\x18\x01\x20\x01(\tR\x02c\
+    f\x12\x12\n\x04size\x18\x02\x20\x01(\x04R\x04size\x12\x1a\n\x08checksum\
+    \x18\x03\x20\x01(\rR\x08checksum\"H\n\x0cSnapshotMeta\x128\n\x08cf_files\
+    \x18\x01\x20\x03(\x0b2\x1d.raft_serverpb.SnapshotCFFileR\x07cfFiles\"Y\n\
+    \rSnapshotChunk\x124\n\x07message\x18\x01\x20\x01(\x0b2\x1a.raft_serverp\
+    b.RaftMessageR\x07message\x12\x12\n\x04data\x18\x02\x20\x01(\x0cR\x04dat\
+    a\"\x06\n\x04Done\"2\n\x08KeyValue\x12\x10\n\x03key\x18\x01\x20\x01(\x0c\
+    R\x03key\x12\x14\n\x05value\x18\x02\x20\x01(\x0cR\x05value\"\xcf\x01\n\
+    \x10RaftSnapshotData\x12&\n\x06region\x18\x01\x20\x01(\x0b2\x0e.metapb.R\
+    egionR\x06region\x12\x1b\n\tfile_size\x18\x02\x20\x01(\x04R\x08fileSize\
+    \x12+\n\x04data\x18\x03\x20\x03(\x0b2\x17.raft_serverpb.KeyValueR\x04dat\
+    a\x12\x18\n\x07version\x18\x04\x20\x01(\x04R\x07version\x12/\n\x04meta\
+    \x18\x05\x20\x01(\x0b2\x1b.raft_serverpb.SnapshotMetaR\x04meta\"F\n\nSto\
+    reIdent\x12\x1d\n\ncluster_id\x18\x01\x20\x01(\x04R\tclusterId\x12\x19\n\
+    \x08store_id\x18\x02\x20\x01(\x04R\x07storeId\"b\n\x0eRaftLocalState\x12\
+    1\n\nhard_state\x18\x01\x20\x01(\x0b2\x12.eraftpb.HardStateR\thardState\
+    \x12\x1d\n\nlast_index\x18\x02\x20\x01(\x04R\tlastIndex\"\x81\x01\n\x0eR\
+    aftApplyState\x12#\n\rapplied_index\x18\x01\x20\x01(\x04R\x0cappliedInde\
+    x\x12J\n\x0ftruncated_state\x18\x02\x20\x01(\x0b2!.raft_serverpb.RaftTru\
+    ncatedStateR\x0etruncatedState\"i\n\nMergeState\x12\x1b\n\tmin_index\x18\
+    \x01\x20\x01(\x04R\x08minIndex\x12&\n\x06target\x18\x02\x20\x01(\x0b2\
+    \x0e.metapb.RegionR\x06target\x12\x16\n\x06commit\x18\x03\x20\x01(\x04R\
+    \x06commit\"\xa6\x01\n\x10RegionLocalState\x12.\n\x05state\x18\x01\x20\
+    \x01(\x0e2\x18.raft_serverpb.PeerStateR\x05state\x12&\n\x06region\x18\
+    \x02\x20\x01(\x0b2\x0e.metapb.RegionR\x06region\x12:\n\x0bmerge_state\
+    \x18\x03\x20\x01(\x0b2\x19.raft_serverpb.MergeStateR\nmergeState*A\n\tPe\
+    erState\x12\n\n\x06Normal\x10\0\x12\x0c\n\x08Applying\x10\x01\x12\r\n\tT\
+    ombstone\x10\x02\x12\x0b\n\x07Merging\x10\x03B\x12\n\x10org.tikv.kvproto\
+    b\x06proto3\
 ";
 
 static mut file_descriptor_proto_lazy: ::protobuf::lazy::Lazy<::protobuf::descriptor::FileDescriptorProto> = ::protobuf::lazy::Lazy {
