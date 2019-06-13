@@ -31,3 +31,9 @@ protobuf-build = "0.1"
 [replace]
 "protobuf-codegen:2.0.6" = { git = "https://github.com/pingcap/rust-protobuf.git", rev = "d9dc5ba0d8ecdc32dfd52c0edd06a98bbcd96b4e" }
 "protobuf:2.0.6" = { git = "https://github.com/pingcap/rust-protobuf.git", rev = "d9dc5ba0d8ecdc32dfd52c0edd06a98bbcd96b4e" }
+
+[profile.release]
+codegen-units = 1
+
+[profile.bench]
+codegen-units = 1
