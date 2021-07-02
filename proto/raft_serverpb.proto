@@ -67,28 +67,6 @@ message StoreIdent {
     uint64 store_id = 2;
 }
 
-enum ReplicaStatus {
-    // The peer is in healthy state.
-    Healthy = 0;
-    // When a peer is just created, it's uninitialized.
-    Uninitialized = 1;
-    // When a peer has accept a snapshot, it needs to wait to apply the snapshot.
-    PendingSnapshot = 2;
-    // The peer is waiting for being merged. The state can be changed back to `Healthy` by
-    // rollback prepare merge.
-    MergingV2 = 3;
-    // The peer has been merged. A merged peer is the same as `MergingV2` except it can be
-    // reverted back to healthy.
-    MergedV2 = 4;
-    // The peer has been deleted.
-    TombstoneV2 = 5;
-}
-
-message ReplicaLocalState {
-    uint64 peer_id = 1;
-    ReplicaStatus status = 2;
-}
-
 message RaftLocalState {
     eraftpb.HardState hard_state = 1;
     uint64 last_index = 2;
@@ -103,10 +81,20 @@ message RaftApplyState {
 }
 
 enum PeerState {
+    // The peer is in healthy state.
     Normal = 0;
+    // When a peer has accept a snapshot, it needs to wait to apply the snapshot.
     Applying = 1;
+    // The peer has been deleted.
     Tombstone = 2;
+    // The peer is waiting for being merged. The state can be changed back to `Healthy` by
+    // rollback prepare merge.
     Merging = 3;
+    // The peer has been merged. A merged peer is the same as `Merging` except it can be
+    // reverted back to healthy.
+    Merged = 4;
+    // When a peer is just created, it's uninitialized.
+    Uninitialized = 5;
 }
 
 message MergeState {
@@ -119,6 +107,8 @@ message RegionLocalState {
     PeerState state = 1;
     metapb.Region region = 2;
     MergeState merge_state = 3;
+    // Only available when setting in raftdb side, to indicate which state is newer.
+    uint64 index = 4;
 }
 
 enum ExtraMessageType {
