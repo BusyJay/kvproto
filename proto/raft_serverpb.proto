@@ -107,8 +107,9 @@ message RegionLocalState {
     PeerState state = 1;
     metapb.Region region = 2;
     MergeState merge_state = 3;
-    // Only available when setting in raftdb side, to indicate which state is newer.
     uint64 index = 4;
+    // Only available when setting in raftdb side, to indicate the kv db path.
+    uint64 tablet_suffix = 5;
 }
 
 enum ExtraMessageType {
